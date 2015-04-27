@@ -2,8 +2,9 @@
 #仿微博下拉或上拉刷新
 名字小土，也不知道怎么叫，那就叫上拉下拉刷新呗，模仿微博的效果。在容器顶部向下拉并释放或在底部向上拉并释放，然后返回回调函数，你想干嘛干嘛，不依赖jq或zp等类库。
 ### 1、HTML的布局结构<br /> 
-![img](http://yuminjustin.cn/uploadfile/2015/0427/01.jpg "img")<br /> 
-     < div id="holdBox">  //可视区域 
+![img](http://yuminjustin.cn/uploadfile/2015/0427/01.jpg "img")<br />
+    
+    < div id="holdBox">  //可视区域 
        // 必要的css属性 position: relative; overflow: hidden;
         < div id="insertBox"> //容器
         // 必要的css属性 position: relative;  overflow-y: scroll;
@@ -18,6 +19,7 @@
             < /ul>
         < /div>
     < /div>
+    
 ### 2、js的引用，要在HTML文件末尾在body结束符里面<br /> 
 ![img2](http://yuminjustin.cn/uploadfile/2015/0427/02.jpg "img2") <br /> 
 ### 3、js代码的使用<br /> 
