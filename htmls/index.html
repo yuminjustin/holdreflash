@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+    <title>下拉刷新</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        #holdBox {
+            width: 100%;
+            height: 80%;
+            margin: 10% 0;
+            border: solid 1px #ccc;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #insertBox {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        #insertBox ul {
+            width: 92%;
+            padding: 0 4%;
+            min-height: 100%;
+            background: #f5f5f5;
+        }
+        
+        #insertBox ul li {
+            line-height: 52px;
+            border-bottom: dotted 1px #ccc;
+        }
+        
+        #insertBox ul li:last-of-type {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="holdBox">
+        <div id="insertBox">
+            <ul>
+                <li>
+                    <p>
+                        <span>
+                    <a href="#">标题标题标题标题标题H</a>
+                    </span>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <span>
+                    <a href="#">标题标题标题标题标题</a>
+                    </span>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <span>
+                    <a href="#">标题标题标题标题标题</a>
+                    </span>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <span>
+                    <a href="#">标题标题标题标题标题F</a>
+                    </span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="tips"></div>
+    <script src="holdreflash.min.js?v=234124124"></script>
+    <script>
+        (function () {
+            var h = new HoldReflash({
+                target: "#holdBox",
+                insertf: "#insertBox",
+                insert: "ul",
+                item: "li",
+                headrelease: function (o) {
+                    var html = getlist();
+                    //o.success(html);
+                    o.fail();
+                },
+                footrelease: function (o) {
+                    var html = getlist2();
+                    o.success(html);
+                    //o.fail();
+                }
+            });
+
+            var getlist = function () {
+                var temp = "<li><p><span><a href='#'>22222222222H</a></span></p></li><li><p><span><a href='#'>22222222222</a></span></p></li><li><p><span><a href='#'>22222222222F</a></span></p></li>";
+                return temp;
+            }
+            var getlist2 = function () {
+                var temp = "<li><p><span><a href='#'>1111111111H</a></span></p></li><li><p><span><a href='#'>1111111111</a></span></p></li><li><p><span><a href='#'>1111111111F</a></span></p></li>";
+                return temp;
+            }
+        })();
+    </script>
+</body>
+
+</html>
