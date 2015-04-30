@@ -1,6 +1,7 @@
 # holdreflash
 #仿微博下拉或上拉刷新
 名字小土，也不知道怎么叫，那就叫上拉下拉刷新呗，模仿微博的效果。在容器顶部向下拉并释放或在底部向上拉并释放，然后返回回调函数，你想干嘛干嘛，不依赖jq或zp等类库。
+### 更新功能：添加没有更多的情况，更新日期：2015-04-30
 ### 1、HTML的布局结构<br /> 
 ![img](http://yuminjustin.cn/uploadfile/2015/0427/01.jpg "img")<br />
     
@@ -34,6 +35,7 @@
         headrelease: function (o) { //顶部回掉函数 返回的函数有两个方法 如下
               //o.success(html); //成功，将要插入的html字符串传入即可
               o.fail(); //失败，注意：成功和失败不能直接放在一起，要放在if else之类的条件语句中分开使用
+              o.none()//没有更多的情况使用
         },
         footrelease: function (o) {//底部回掉函数 返回的函数有两个方法 如下
               o.success(html); //同上
