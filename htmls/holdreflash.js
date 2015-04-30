@@ -150,6 +150,12 @@
                                 setTimeout(function () {
                                     operation();
                                 }, 800);
+                            },
+                            none: function () {
+                                loadingnone(self.lLoading);
+                                setTimeout(function () {
+                                    operation();
+                                }, 800);
                             }
                         });
                     }, 1000);
@@ -175,6 +181,12 @@
                             },
                             fail: function () {
                                 loadingfail(self.fLoading);
+                                setTimeout(function () {
+                                    operation();
+                                }, 800);
+                            },
+                            none: function () {
+                                loadingnone(self.fLoading);
                                 setTimeout(function () {
                                     operation();
                                 }, 800);
@@ -232,6 +244,13 @@
             img = o.querySelectorAll("img")[0];
         img.src = style.failImg;
         p.innerHTML = "加载失败!";
+    }
+
+    function loadingnone(o) {
+        var p = o.querySelectorAll("p")[0],
+            img = o.querySelectorAll("img")[0];
+        img.src = "";
+        p.innerHTML = "没有更多了";
     }
 
     function loadingRollback(o) {
