@@ -108,6 +108,7 @@
             } else return false;
         }, false);
         self.insertf.addEventListener("touchend", function (e) {
+            var data = new Date();
             if (self.firstTime == 2) {
                 if ((self.drag.ca > 0 && self.pos == 0) || (self.drag.ca < 0 && self.pos == 1))
                     e.preventDefault();
@@ -115,15 +116,10 @@
             }
             if (self.drag.y && self.dragable == 2) {
                 e.preventDefault();
-                var data = new Date();
                 self.dragable = 3;
-                if (self.fail) {
+                if (self.fail||(data.getTime() - self.drag.t) < 280) {
+                    spec(e.target, self.item, self.insert);
                     self.fix();
-                    return false;
-                }
-                if ((data.getTime() - self.drag.t) < 280) {
-                    self.fix();
-                    spec(e.target, self.item);
                     return false;
                 }
                 if (self.pos) {
@@ -273,22 +269,21 @@
         o.addEventListener("transitionend", aoff, false);
     }
 
-    function spec(o, item, ol, s) {
-        ol = ol || o;
-        if (o.tagName == "A") o.click();
-        else {
-            if (o.onclick) o.click();
-            else {
-                if (o.children && !s) spec(o.children, item, ol);
-                else {
-                    var p = ol.parentElement,
-                        pn = item.toUpperCase();
-                    if (p.tagName == pn || pn.indexOf(p.className) > -1)
-                        spec(p, item, ol, 1);
-                    else return false;
-                }
+    function spec(o, fn, f) {
+        if (!toclick(o)) {
+            var p = o.parentElement;
+            if(!toclick(p)&&(p.tagName==fn.toUpperCase()||p.className.indexOf(fn)>-1)){
+                console.log(p.parentElement!==f,p.parentElement)
+                if(p.parentElement!==f) spec(p.parentElement, fn, f);
+                else return false;
             }
+            else  spec(p, fn, f);
         }
+        else return false;
+    }
+    function toclick(o){
+        if (o.tagName == "A" || o.onclick) o.click();
+        else return false;
     }
     window.HoldReflash = holdreflash;
 })();
