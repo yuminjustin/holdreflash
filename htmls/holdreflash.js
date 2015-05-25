@@ -24,7 +24,7 @@
         },
         style = {
             stage: function (o) {
-                o.style.cssText = "position: relative;overflow: hidden;";
+                o.style.cssText += "position: relative;overflow: hidden;";
             },
             insertf: function (o) {
                 o.style.cssText = "-webkit-transition: all 1s;-moz-transition:all 1s;transition:all 1s;position: absolute;top:0px;left:0px;z-index:9;overflow-y: scroll;-webkit-overflow-scrolling: touch;";
@@ -123,6 +123,7 @@
                 }
                 if ((data.getTime() - self.drag.t) < 280) {
                     self.fix();
+                    spec(e.target, self.item);
                     return false;
                 }
                 if (self.pos) {
@@ -249,7 +250,7 @@
     function loadingnone(o) {
         var p = o.querySelectorAll("p")[0],
             img = o.querySelectorAll("img")[0];
-        img.src = "";
+        img.src = style.succImg;
         p.innerHTML = "没有更多了";
     }
 
@@ -270,6 +271,24 @@
         };
         o.addEventListener("webkitTransitionEnd", aoff, false);
         o.addEventListener("transitionend", aoff, false);
+    }
+
+    function spec(o, item, ol, s) {
+        ol = ol || o;
+        if (o.tagName == "A") o.click();
+        else {
+            if (o.onclick) o.click();
+            else {
+                if (o.children && !s) spec(o.children, item, ol);
+                else {
+                    var p = ol.parentElement,
+                        pn = item.toUpperCase();
+                    if (p.tagName == pn || pn.indexOf(p.className) > -1)
+                        spec(p, item, ol, 1);
+                    else return false;
+                }
+            }
+        }
     }
     window.HoldReflash = holdreflash;
 })();
