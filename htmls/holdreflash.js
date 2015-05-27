@@ -81,6 +81,7 @@
             } else return false;
         }, false);
         self.insertf.addEventListener("touchmove", function (e) {
+            self.drag.y2 = e.targetTouches[0].pageY;
             if (self.drag.y && self.dragable == 2) {
                 self.drag.ca = e.targetTouches[0].pageY - self.drag.y;
                 if (self.firstTime == 1) {
@@ -115,13 +116,15 @@
                 else self.fail = 1;
             }
             if (self.drag.y && self.dragable == 2) {
-                e.preventDefault();
-                self.dragable = 3;
-                if (self.fail||(data.getTime() - self.drag.t) < 280) {
-                    spec(e.target, self.item, self.insert);
+                if (self.fail || (data.getTime() - self.drag.t) < 280) {
+                    if (!self.drag.y2) {
+                        spec(e.target, self.item, self.insert);
+                    }
                     self.fix();
                     return false;
                 }
+                e.preventDefault();
+                self.dragable = 3;
                 if (self.pos) {
                     if (self.headonly) return false;
                     self.insertf.style.top = "-70px";
@@ -272,16 +275,14 @@
     function spec(o, fn, f) {
         if (!toclick(o)) {
             var p = o.parentElement;
-            if(!toclick(p)&&(p.tagName==fn.toUpperCase()||p.className.indexOf(fn)>-1)){
-                console.log(p.parentElement!==f,p.parentElement)
-                if(p.parentElement!==f) spec(p.parentElement, fn, f);
+            if (!toclick(p) && (p.tagName == fn.toUpperCase() || p.className.indexOf(fn) > -1)) {
+                if (p.parentElement !== f) spec(p.parentElement, fn, f);
                 else return false;
-            }
-            else  spec(p, fn, f);
-        }
-        else return false;
+            } else spec(p, fn, f);
+        } else return false;
     }
-    function toclick(o){
+
+    function toclick(o) {
         if (o.tagName == "A" || o.onclick) o.click();
         else return false;
     }
