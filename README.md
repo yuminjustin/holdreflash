@@ -5,7 +5,7 @@
 #### 更新功能：修复点击事件失效的bug，更新日期：2015-05-25
 #### 更新功能：添加没有更多的情况，更新日期：2015-04-30
 ### 1、HTML的布局结构<br /> 
-![img](http://yuminjustin.cn/upload/20150919/01.jpg "img")<br />
+![img](https://yuminjustin.github.io/resource/img/uploads/01.jpg "img")<br />
     
     < div id="holdBox">  //可视区域 
        // 必要的css属性 position: relative; overflow: hidden;
@@ -24,7 +24,7 @@
     < /div>
     
 ### 2、js的引用，要在HTML文件末尾在body结束符里面<br /> 
-![img2](http://yuminjustin.cn/upload/20150919/02.jpg "img2") <br /> 
+![img2](https://yuminjustin.github.io/resource/img/uploads/02.jpg "img2") <br /> 
 ### 3、js代码的使用<br /> 
 
      var h = new HoldReflash({
@@ -44,6 +44,4 @@
               //o.fail(); //同上
         }
     });
-1、[详细内容](http://dwz.cn/1JZ7yG)<br />  
-2、demo 扫一扫<br />  
-![img3](http://yuminjustin.cn/upload/qrcode/reflash.jpg "img3")
+[详细内容](https://yuminjustin.github.io/?/arc/arcid:05/channel:arc)<br />  
